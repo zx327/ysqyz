@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>粤式群英传 - 品味岭南文化</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AOS 动画库 -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #8B0000; /* 深棕红 */
+            --secondary-color: #2E4E7E; /* 靛蓝 */
+            --accent-color: #D4AF37; /* 浅金 */
+            --light-color: #F8F1E5; /* 米白 */
+            --dark-color: #333;
+            --stone-blue: #6B8E9C; /* 石青 */
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 20px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        /* 导航栏样式 */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transform: translateY(-100%);
+            transition: transform 0.4s ease;
+        }
+        
+        header.show {
+            transform: translateY(0);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            font-family: "楷体", "STKaiti", serif;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        /* 英雄区域样式 */
+        .hero {
+            height: 100vh;
+            background: url('https://i.imgur.com/GTFqU3C.png') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: rgb(224, 220, 11);
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #f00606;
+            font-family: "楷体", "STKaiti", serif;
+            text-shadow: 2px 2px 4px rgba(222, 229, 16, 0.894);
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #ddecab;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(206, 98, 98, 0.1);
+        }
+        
+        /* 品牌介绍样式 */
+        .about {
+            background: linear-gradient(rgba(248, 241, 229, 0.8), rgba(248, 241, 229, 0.8)), 
+                        url('https://i.imgur.com/2zQXYpK.png') center/cover no-repeat;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: "楷体", "STKaiti", serif;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            position: relative;
+            animation: titleGlow 3s infinite alternate;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* 产品展示样式 */
+        .products {
+            background: linear-gradient(rgba(245, 245, 245, 0.9), rgba(245, 245, 245, 0.9)), 
+                        url('https://i.imgur.com/2zQXYpK.png') center/cover no-repeat;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .price {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.4rem;
+            margin: 15px 0;
+        }
+
+         /* 购买数量控件 */
+        .quantity-controls {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .quantity-btn:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .quantity-display {
+            margin: 0 15px;
+            font-weight: bold;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .purchased-info {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+        }
+
+        .contact-section {
+            background-color: #f8f5f0;
+            padding: 80px 0;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            padding: 0 20px;
+        }
+
+        .contact-info h2,
+        .contact-form h2 {
+            color: #9e2a2b;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            font-family: "STXingkai", "KaiTi", cursive;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        .contact-content h3 {
+            color: #2c5530;
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+
+        .contact-detail {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .contact-note {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #9e2a2b;
+        }
+
+        .submit-btn {
+            background-color: #9e2a2b;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #7a2122;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+    
+           .contact-form {
+                padding: 30px 20px;
+            }
+        }  
+        /* 联系我们页面样式 */
+        .contact {
+            position: relative;
+            background: linear-gradient(rgba(248, 241, 229, 0.9), rgba(248, 241, 229, 0.9)), 
+                        url('https://i.imgur.com/9LdFw9E.png') center/cover no-repeat;
+            overflow: hidden;
+        }
+        /* 岭南花窗背景 */
+        .contact::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(248, 241, 229, 0.7), rgba(248, 241, 229, 0.7)),
+                url("https://i.imgur.com/9LdFw9E.png");
+            z-index: -1;
+        }
+        
+        /* 骑楼剪影 */
+        .arcade-silhouette {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, rgba(0,0,0,0.1) 0%, transparent 100%);
+            clip-path: polygon(
+                0% 100%, 2% 80%, 4% 90%, 6% 70%, 8% 85%, 10% 75%, 
+                12% 95%, 14% 65%, 16% 80%, 18% 70%, 20% 90%, 
+                22% 60%, 24% 85%, 26% 75%, 28% 95%, 30% 65%, 
+                32% 80%, 34% 70%, 36% 90%, 38% 60%, 40% 85%, 
+                42% 75%, 44% 95%, 46% 65%, 48% 80%, 50% 70%, 
+                52% 90%, 54% 60%, 56% 85%, 58% 75%, 60% 95%, 
+                62% 65%, 64% 80%, 66% 70%, 68% 90%, 70% 60%, 
+                72% 85%, 74% 75%, 76% 95%, 78% 65%, 80% 80%, 
+                82% 70%, 84% 90%, 86% 60%, 88% 85%, 90% 75%, 
+                92% 95%, 94% 65%, 96% 80%, 98% 70%, 100% 100%
+            );
+            z-index: -1;
+        }
+        
+        /* 镬耳山墙轮廓 */
+        .hok-ear-left, .hok-ear-right {
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 200px;
+            background-color: var(--stone-blue);
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .hok-ear-left {
+            left: 0px;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 70%);
+        }
+        
+        .hok-ear-right {
+            right: 0;
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
+        }
+        
+        .contact-container {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .contact-info {
+            padding: 40px 80px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-form {
+            padding: 40px 100px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            position: relative;
+        }
+        
+        /* 粤式风格图标 */
+        .contact-icon.phone::after {
+            content: "";
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+        
+        .contact-icon.email::before {
+            content: "";
+            position: absolute;
+            width: 70%;
+            height: 40%;
+            border: 2px solid white;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .contact-icon.address::before {
+            content: "";
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            background-color: white;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+        
+        .contact-icon i {
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .contact-details h3 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            transition: all 0.3s;
+            background-color: #fff;
+        }
+        
+        /* 满洲窗样式输入框 */
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(46, 78, 126, 0.1);
+            outline: none;
+            background-image: 
+                linear-gradient(45deg, transparent 49%, rgba(212, 175, 55, 0.2) 49%, rgba(212, 175, 55, 0.2) 51%, transparent 51%),
+                linear-gradient(-45deg, transparent 49%, rgba(212, 175, 55, 0.2) 49%, rgba(212, 175, 55, 0.2) 51%, transparent 51%);
+            background-size: 10px 10px;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* 广彩瓷风格的按钮 */
+        .submit-btn {
+            background: linear-gradient(to bottom, var(--primary-color), #6a0000);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 0 #6a0000;
+        }
+        
+        .submit-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 40%, rgba(212, 175, 55, 0.3) 50%, transparent 60%);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+        
+        .submit-btn:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #6a0000;
+        }
+        
+        .submit-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #6a0000;
+        }
+
+         /* 舞狮龙形分隔线 */
+        .divider {
+            height: 4px;
+            background: linear-gradient(to right, transparent, var(--primary-color), var(--accent-color), var(--primary-color), transparent);
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .divider::before, .divider::after {
+            content: "🐉";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            animation: dragonMove 1s infinite alternate;
+        }
+        
+        @keyframes dragonMove {
+            0% {
+                transform: translateY(-50%) translateX(-100%);
+            }
+            100% {
+                transform: translateY(-50%) translateX(100%);
+            }
+        }
+        
+        .divider::before {
+            left: 30%;
+        }
+        
+        .divider::after {
+            right: 30%;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* 珠江波浪底部装饰 */
+        footer::before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: 
+                radial-gradient(circle at 10% 50%, transparent 20px, var(--dark-color) 21px),
+                radial-gradient(circle at 30% 50%, transparent 20px, var(--dark-color) 21px),
+                radial-gradient(circle at 50% 50%, transparent 20px, var(--dark-color) 21px),
+                radial-gradient(circle at 70% 50%, transparent 20px, var(--dark-color) 21px),
+                radial-gradient(circle at 90% 50%, transparent 20px, var(--dark-color) 21px);
+            background-size: 20% 100%;
+            background-repeat: repeat-x;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* 印章样式 */
+        .seal {
+            display: inline-block;
+            padding: 8px 15px;
+            border: 2px solid var(--primary-color);
+            border-radius: 5px;
+            font-family: "楷体", "STKaiti", serif;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        .seal::before, .seal::after {
+            content: "?";
+            position: absolute;
+            color: var(--primary-color);
+        }
+        
+        .seal::before {
+            top: -5px;
+            left: -5px;
+        }
+        
+        .seal::after {
+            bottom: -5px;
+            right: -5px;
+        }
+        
+        /* 购物车侧边栏 */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 1001;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .cart-sidebar.active {
+            right: 0;
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-color);
+        }
+        
+        .cart-items {
+            margin-bottom: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-price {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .cart-total {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .checkout-btn:hover {
+            background-color: #a02626;
+        }
+        
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+        
+        .cart-overlay.active {
+            display: block;
+        }
+        
+        /* 购买成功提示 */
+        .purchase-success {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 1002;
+            transition: transform 0.3s;
+        }
+        
+        .purchase-success.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        /* 回到顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top i {
+            margin-right: 8px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 15px;
+            }
+            
+            .nav-links li {
+                margin: 0 10px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hok-ear-left, .hok-ear-right {
+                display: none;
+            }
+            
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header id="mainHeader">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">粤式群英传</div>
+                <ul class="nav-links">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#about">品牌介绍</a></li>
+                    <li><a href="#products">产品购买</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                    <li class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+                        <h1>粤式群英传</h1>
+                        <p>探索岭南文化的精髓，品味粤式生活的魅力。从传统美食到工艺精品，<br>从历史故事到现代创新，粤文化在这里绽放光彩。</p>
+                        <a href="#products" class="btn">探索产品</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 品牌介绍 -->
+<section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">品牌故事</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h3>为什么我们要做岭南文创？</h3>
+                    <p class="mb-4">我们从Z世代的文化断层中醒来，目睹英歌舞的火爆与内涵的失语，亲历“他乡月亮”与“本土灯火”的冷暖。</p>
+                    <p>于是，一群岭南学子决意破局——将《三国杀》的权谋骨架，注入广东文化的滚烫血液。广州塔、老火汤、东坡西湖皆入阵；【杀】【闪】【桃】化身粤味梗。在一张张手绘卡牌间，完成一场场无感的文化播种。</p>
+                    <p>这，不只是桌游，是我們写给岭南最炽热的情书，更是让传统在游戏中活过来的青春革命。</p>
+                    <div class="row mt-5">
+                        <div class="col-md-4 text-center" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="feature-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <h5>艺术传承</h5>
+                        </div>
+                        <div class="col-md-4 text-center" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="feature-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h5>创新设计</h5>
+                        </div>
+                        <div class="col-md-4 text-center" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="feature-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h5>生活美学</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <img src="https://i.imgur.com/XY7z1fQ.png" 
+                         alt="岭南文创" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品展示 -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">精选产品</h2>
+            <div class="row"></div>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 20px;">探索我们精心挑选的粤文化产品，每一件都承载着岭南文化的独特魅力。</p>
+            <div class="products-grid">
+                <!-- 产品1 -->
+                <div class="product-card"data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-image">
+                        <img src="https://i.imgur.com/5fJX3yh.jpg" alt="钥匙扣">
+                    </div>
+                    <div class="product-info">
+                        <h3>钥匙扣</h3>
+                        <p>🎁 送的是钥匙扣，传递的是 “粤式情怀杀”<br>送外地朋友：这是 “能带走的岭南记忆”，让 TA 把惠州西湖的美、广府舞狮的劲、粤菜的香随时揣在身边；<br>🏮送本地亲友：这是 “懂你的粤式浪漫”，一句 “东坡居士的梗你 get 了没”，分分钟拉满共同记忆；
+<br>自己收藏,这是 “随身携带的文化Buff”，钥匙串从此告别单调，每一次掏钥匙都是 “粤文化小高光”。</p>
+                        <div class="price">¥3.98</div>
+                        <button class="btn add-to-cart" data-id="1" data-name="钥匙扣" data-price="3.98" data-image="https://i.imgur.com/5fJX3yh.jpg">立即购买</button>
+                        <div class="quantity-controls" data-id="1">
+                            <button class="quantity-btn minus-btn">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn plus-btn">+</button>
+                        </div>
+                        <div class="purchased-info" data-id="1">已购买 <span>1</span> 件</div>
+                    </div>
+                </div>
+                
+                <!-- 产品2 -->
+                <div class="product-card"data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-image">
+                        <img src="https://i.imgur.com/6GzHkGz.jpg" alt="岭南特色三国杀">
+                    </div>
+                    <div class="product-info">
+                        <h3>粤式群英传</h3>
+                        <p>🛒 现在入手，做朋友圈第一个 “粤式杀神”别等别人玩烂了才后悔！<br><br>🔥现在下单，做第一个把岭南文化和卡牌爽感拉满的狠人！不管你是《三国杀》骨灰粉，还是想 get 岭南文化新玩法的潮人，这波 “粤式群英传”，冲就完事了！<br><br>👇 点击下单，开启你的 “岭南杀疯之旅”，晚了可就抢不到咯！</p>
+                        <div class="price">¥39.8</div>
+                        <button class="btn add-to-cart" data-id="2" data-name="岭南特色三国杀" data-price="39.8" data-image="https://i.imgur.com/6GzHkGz.jpg">立即购买</button>
+                        <div class="quantity-controls" data-id="2">
+                            <button class="quantity-btn minus-btn">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn plus-btn">+</button>
+                        </div>
+                        <div class="purchased-info" data-id="2">已购买 <span>1</span> 件</div>
+                    </div>
+                </div>
+                
+                <!-- 产品3 -->
+                <div class="product-card"data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-image">
+                        <img src="https://i.imgur.com/7XnQ7wY.jpg" alt="贴纸">
+                    </div>
+                    <div class="product-info">
+                        <h3>方言贴</h3>
+                        <p>🎯一贴入魂，把方言梗玩成社交硬通货<br>方言人狂喜！原创梗贴直接戳中 “母语心巴”<br><br>🔥还在贴千篇一律的网红标语？这款 “本命方言贴” 把你的家乡梗焊在生活里！“快啲自拍”“燥底你”“掂过碌蔗”……100% 原创粤语梗，每一张都精准踩中广府人 DNA，贴手机、贴电脑、贴行李箱，别人问 “这啥意思？”，你就能开启 “方言传教士” 模式，文化输出直接拉满！</p>
+                        <div class="price">¥1.98</div>
+                        <button class="btn add-to-cart" data-id="3" data-name="贴纸" data-price="1.98" data-image="https://i.imgur.com/7XnQ7wY.jpg">立即购买</button>
+                        <div class="quantity-controls" data-id="3">
+                            <button class="quantity-btn minus-btn">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn plus-btn">+</button>
+                        </div>
+                        <div class="purchased-info" data-id="3">已购买 <span>1</span> 件</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- 联系我们 -->
+    <section id="contact" class="contact">
+        <div class="hok-ear-left"></div>
+        <div class="hok-ear-right"></div>
+        <div class="arcade-silhouette"></div>
+        
+        <div class="container">
+            <h2 class="section-title">联系我们</h2>
+            <p style="text-align: center; margin-bottom: 40px;">得闲倾倾，随时Call我哋！</p>
+            
+            <div class="divider"></div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>联系信息</h3>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon phone">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>电话</h3>
+                            <p>15360279334</p>
+                            <small>朝九晚六，随时接听</small>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon email">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>邮箱</h3>
+                            <p>2179438872@qq.com</p>
+                            <small>24小时内回复</small>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon address">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>地址</h3>
+                            <p>广东技术师范大学</p>
+                            <small>欢迎亲临参观</small>
+                        </div>
+                    </div>
+                    
+                    <div class="seal">粤式群英传</div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>留言咨询</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">姓名</label>
+                            <input type="text" id="name" class="form-control" placeholder="请输入您的姓名" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">邮箱</label>
+                            <input type="email" id="email" class="form-control" placeholder="请输入您的邮箱" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">主题</label>
+                            <input type="text" id="subject" class="form-control" placeholder="请输入主题" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">留言</label>
+                            <textarea id="message" class="form-control" placeholder="请输入您的留言内容" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn submit-btn">发送留言</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>关于我们</h3>
+                    <p>粤式群英传致力于传承和推广岭南文化，让更多人了解和喜爱粤式生活方式。</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>快速链接</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">首页</a></li>
+                        <li><a href="#about">品牌介绍</a></li>
+                        <li><a href="#products">产品购买</a></li>
+                        <li><a href="#contact">联系我们</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>关注我们</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">微信公众号</a></li>
+                        <li><a href="#">微博</a></li>
+                        <li><a href="#">抖音</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 粤式群英传 || 版权所有</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap & AOS JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <script>
+        // 初始化AOS动画
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    </script>
+
+    <!-- 购物车侧边栏 -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3 class="cart-title">购物车</h3>
+            <button class="close-cart" id="closeCart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- 购物车项目会动态添加到这里 -->
+        </div>
+        <div class="cart-total">
+            总计: ¥<span id="cartTotal">0</span>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn">去结算</button>
+    </div>
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- 购买成功提示 -->
+    <div class="purchase-success" id="purchaseSuccess">
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h3>购买成功！欢迎下次光临！</h3>
+        <p>商品已成功添加到购物车</p>
+        <button class="btn" id="closeSuccess">确定</button>
+    </div>
+
+    <!-- 回到顶部按钮 -->
+    <a href="#home" class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+        <span>回到顶部</span>
+    </a>
+
+    <script>
+        // 购物车功能
+        let cart = [];
+        const cartIcon = document.getElementById('cartIcon');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const closeCart = document.getElementById('closeCart');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const cartCount = document.getElementById('cartCount');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const purchaseSuccess = document.getElementById('purchaseSuccess');
+        const closeSuccess = document.getElementById('closeSuccess');
+        const mainHeader = document.getElementById('mainHeader');
+        
+        // 导航栏显示控制
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 100) {
+                mainHeader.classList.add('show');
+            } else {
+                mainHeader.classList.remove('show');
+            }
+        });
+
+        // 打开购物车
+        cartIcon.addEventListener('click', () => {
+            cartSidebar.classList.add('active');
+            cartOverlay.classList.add('active');
+        });
+
+        // 关闭购物车
+        closeCart.addEventListener('click', () => {
+            cartSidebar.classList.remove('active');
+            cartOverlay.classList.remove('active');
+        });
+
+        cartOverlay.addEventListener('click', () => {
+            cartSidebar.classList.remove('active');
+            cartOverlay.classList.remove('active');
+        });
+
+        // 添加到购物车
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const id = button.getAttribute('data-id');
+                const name = button.getAttribute('data-name');
+                const price = parseFloat(button.getAttribute('data-price'));
+                const image = button.getAttribute('data-image');
+                
+                // 隐藏购买按钮，显示数量控制器
+                button.style.display = 'none';
+                const quantityControls = document.querySelector(`.quantity-controls[data-id="${id}"]`);
+                quantityControls.style.display = 'flex';
+                
+                // 显示已购买信息
+                const purchasedInfo = document.querySelector(`.purchased-info[data-id="${id}"]`);
+                purchasedInfo.style.display = 'block';
+                
+                // 检查商品是否已在购物车中
+                const existingItem = cart.find(item => item.id === id);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id,
+                        name,
+                        price,
+                        image,
+                        quantity: 1
+                    });
+                }
+                
+                updateCart();
+                
+                // 显示购买成功提示
+                purchaseSuccess.classList.add('active');
+            });
+        });
+
+        // 数量增减按钮事件
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('plus-btn')) {
+                const id = e.target.closest('.quantity-controls').getAttribute('data-id');
+                const item = cart.find(item => item.id === id);
+                if (item) {
+                    item.quantity += 1;
+                    updateCart();
+                    updateQuantityDisplay(id, item.quantity);
+                }
+            }
+            
+            if (e.target.classList.contains('minus-btn')) {
+                const id = e.target.closest('.quantity-controls').getAttribute('data-id');
+                const item = cart.find(item => item.id === id);
+                if (item && item.quantity > 1) {
+                    item.quantity -= 1;
+                    updateCart();
+                    updateQuantityDisplay(id, item.quantity);
+                } else if (item && item.quantity === 1) {
+                    // 如果数量为1，点击减号则移除商品
+                    cart = cart.filter(item => item.id !== id);
+                    updateCart();
+                    
+                    // 恢复购买按钮，隐藏数量控制器和已购买信息
+                    const addButton = document.querySelector(`.add-to-cart[data-id="${id}"]`);
+                    addButton.style.display = 'inline-block';
+                    
+                    const quantityControls = document.querySelector(`.quantity-controls[data-id="${id}"]`);
+                    quantityControls.style.display = 'none';
+                    
+                    const purchasedInfo = document.querySelector(`.purchased-info[data-id="${id}"]`);
+                    purchasedInfo.style.display = 'none';
+                }
+            }
+        });
+
+        // 更新数量显示
+        function updateQuantityDisplay(id, quantity) {
+            const quantityDisplay = document.querySelector(`.quantity-controls[data-id="${id}"] .quantity-display`);
+            quantityDisplay.textContent = quantity;
+            
+            const purchasedInfo = document.querySelector(`.purchased-info[data-id="${id}"] span`);
+            purchasedInfo.textContent = quantity;
+        }
+
+        // 关闭购买成功提示
+        closeSuccess.addEventListener('click', () => {
+            purchaseSuccess.classList.remove('active');
+        });
+
+        // 更新购物车
+        function updateCart() {
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+            
+            cartItems.innerHTML = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">¥${item.price.toFixed(2)} x ${item.quantity}</div>
+                        <button class="cart-item-remove" data-id="${item.id}">删除</button>
+                    </div>
+                `;
+                
+                cartItems.appendChild(cartItem);
+            });
+            
+            cartTotal.textContent = total.toFixed(2);
+            
+            // 添加删除按钮事件
+            document.querySelectorAll('.cart-item-remove').forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = button.getAttribute('data-id');
+                    cart = cart.filter(item => item.id !== id);
+                    updateCart();
+                    
+                    // 恢复购买按钮，隐藏数量控制器和已购买信息
+                    const addButton = document.querySelector(`.add-to-cart[data-id="${id}"]`);
+                    if (addButton) addButton.style.display = 'inline-block';
+                    
+                    const quantityControls = document.querySelector(`.quantity-controls[data-id="${id}"]`);
+                    if (quantityControls) quantityControls.style.display = 'none';
+                    
+                    const purchasedInfo = document.querySelector(`.purchased-info[data-id="${id}"]`);
+                    if (purchasedInfo) purchasedInfo.style.display = 'none';
+                });
+            });
+        }
+
+        // 结算按钮
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert('购物车为空，请先添加商品');
+            } else {
+                alert('感谢您的购买！我们将尽快处理您的订单。');
+                cart = [];
+                updateCart();
+                cartSidebar.classList.remove('active');
+                cartOverlay.classList.remove('active');
+                
+                // 重置所有产品的购买状态
+                addToCartButtons.forEach(button => {
+                    button.style.display = 'inline-block';
+                });
+                document.querySelectorAll('.quantity-controls').forEach(control => {
+                    control.style.display = 'none';
+                });
+                document.querySelectorAll('.purchased-info').forEach(info => {
+                    info.style.display = 'none';
+                });
+            }
+        });
+
+        // 回到顶部按钮
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 表单提交
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('感谢您的留言！我们会尽快回复您。');
+            this.reset();
+        });
+
+    </script>
+</body>
+</html>
